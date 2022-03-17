@@ -26,7 +26,7 @@ export default class Ban extends Command {
         if (args.member.kickable) {
             const dm = await args.member.createDM(true)
             await dm.send(`You were kicked from ${message.guild!.name}`)
-            await message.reply(`${args.member} was kicked!`);
+            await message.reply(`${args.member.user.username} was kicked!`);
             return await args.member.kick();
         }
         else {
