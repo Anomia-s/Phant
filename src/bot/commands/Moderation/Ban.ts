@@ -15,14 +15,7 @@ export default class Ban extends Command {
                         retry: "A MEMBER not anything else... please.."
                     }
                 },
-                {
-                    id: "reason",
-                    type: "string",
-                    prompt: {
-                        start: "Include a reason.",
-                        retry: "Please specify a reason."
-                    }
-                }
+
             ],
             clientPermissions: ['BAN_MEMBERS'],
             userPermissions: ['BAN_MEMBERS'],
@@ -30,15 +23,15 @@ export default class Ban extends Command {
         })
     }
 
-    public async exec(message: Message, args: { member: GuildMember, reason: string }) {
+    public async exec(message: Message, args: { member: GuildMember}) {
         if (args.member.bannable) {
             try {
                 const dm = await args.member.createDM(true)
-                await dm.send(`You were banned from ${message.guild!.name} for ${args.reason}`)
+                await dm.send(`You were banned from ${message.guild!.name} for ${message.content.split("\"")[1]}`)
             } catch (err) {
                 await message.channel.send(`Small issue sending the member a message. Still banning.`)
             }
-            await message.reply(`${args.member.user.username} was banned!`);
+            await message.reply(`${args.member.user.username} was banned for ${message.content.split("\"")[1]}!`);
             return await args.member.ban();
         }
         else {
