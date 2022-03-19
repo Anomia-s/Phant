@@ -6,7 +6,7 @@ config()
 export default class PhantClient extends AkairoClient {
     public commandHandler = new CommandHandler(this, {
         directory: join(__dirname, '..', 'commands'),
-        prefix: '!',
+        prefix: '$',
         aliasReplacement: /-/g,
         allowMention: true,
         handleEdits: true,
